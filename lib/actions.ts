@@ -1,27 +1,8 @@
 'use server';
 
-import { z } from 'zod';
-
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import { signOut } from '@/auth';
-
-const FormSchema = z.object({
-  id: z.string(),
-  customerId: z.string({
-    invalid_type_error: 'Please select a customer.',
-  }),
-  amount: z.coerce
-    .number()
-    .gt(0, { message: 'Please enter an amount greater than $0.' }),
-  status: z.enum(['pending', 'paid'], {
-    invalid_type_error: 'Please select an invoice status.',
-  }),
-  date: z.string(),
-});
-
-const CreateInvoice = FormSchema.omit({ id: true, date: true });
-const UpdateInvoice = FormSchema.omit({ date: true, id: true });
 
 // This is temporary
 export type State = {
@@ -32,8 +13,6 @@ export type State = {
   };
   message?: string | null;
 };
-
-
 
 
 export async function getMapItems(formData: FormData) {
@@ -84,27 +63,27 @@ export async function getMapItems(formData: FormData) {
   return data;
 }
 
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  console.log(1)
-  try {
-    await signIn('credentials', formData);
-  } catch (error) {
-    console.log(1234, error)
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Логин и пароль не совпадают!';
-        default:
-          return 'Ошибка сервера, обратитесь к администрации!';
-      }
-    }
+// export async function authenticate(
+//   prevState: string | undefined,
+//   formData: FormData,
+// ) {
+//   console.log(1)
+//   try {
+//     await signIn('credentials', formData);
+//   } catch (error) {
+//     console.log(1234, error)
+//     if (error instanceof AuthError) {
+//       switch (error.type) {
+//         case 'CredentialsSignin':
+//           return 'Логин и пароль не совпадают!';
+//         default:
+//           return 'Ошибка сервера, обратитесь к администрации!';
+//       }
+//     }
 
-      throw error;
-  }
-}
+//       throw error;
+//   }
+// }
 
 
 export async function logOut() {

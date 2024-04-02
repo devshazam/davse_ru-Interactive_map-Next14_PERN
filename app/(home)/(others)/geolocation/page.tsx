@@ -1,7 +1,7 @@
 'use client'
 import React, { useState,  useRef, useEffect } from "react";
 import {Map, YMaps ,Placemark} from "@pbe/react-yandex-maps";
-import Loading from "./loading";
+import CustomSpinner from "@/components/customSpinner";
 
 export default function Home() {
   const [coordinates, setCoordinates] = useState<any>(null);
@@ -40,7 +40,7 @@ export default function Home() {
                       </section>
                   </YMaps>
                   :
-                  <Loading />
+                  <CustomSpinner />
               }
     </>
   );

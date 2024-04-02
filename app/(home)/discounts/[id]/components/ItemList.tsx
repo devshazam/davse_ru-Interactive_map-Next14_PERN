@@ -1,44 +1,52 @@
 "use client"
 import React from "react";
 import { Col, Image } from 'antd';
-import getMovies from "@/lib/api/getMovies";
+import {getOneDiscount} from "@/lib/api/getDiscounts";
 import { useSuspenseQuery  } from "@tanstack/react-query";
+import globalParamsObject from "@/lib/config/mainAppParameterObject";
 
 export default function ItemList({ id }: { id: string } ) {
           
     const { data, isLoading, isError } = useSuspenseQuery ({
-        queryFn: async () => await getMovies(id),
-        queryKey: ["movies", id], //Array according to Documentation
+        queryFn: async () => await getOneDiscount(id),
+        queryKey: ["discountOne", id], //Array according to Documentation
       });
     return (
         <> 
+        {data && 
+        <>
             <Col span={24} lg={12}>
-                <Image  alt="скидка Волгограда" src={data[0].image}/>
+                <Image  alt="скидка Волгограда" src={data.image}/>
             </Col>
             <Col span={12}>
                 <ul>
                     <li>
-                        Название: Парикмахерская
+                        Название: {data.title}
                     </li>
                     <li>
-                        Скидка (%): {10}{data[0].id}
+                        Скидка (%): {data.sale}
                     </li> 
                     <li>
-                        Категория скидки: Красота и здоровье
+                        Категория скидки: {globalParamsObject.discounts.discountsCategory[+data.cat]}
                     </li> 
                     <li>
-                        Цена (руб.): {350}
+                        Цена (руб.): { data.cost}
                     </li>
                     
                     <li>
-                        Описание: Хорошее описание
+                        Описание:{ data.description}
                     </li>
                     <li>
-                        Адрес: Петроградская 18
+                        Адрес:{ data.address}
+                    </li>
+                    <li>
+                        ID создателя скидки:{ data.authorId}
                     </li>
 
                 </ul>
             </Col>
+            </>
+            }
         </>
     );
 };

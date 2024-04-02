@@ -1,10 +1,10 @@
 'use client'
 import React from 'react';
-import { Flex, Spin , Image} from 'antd';
+import { Flex, Spin } from 'antd';
 
-export default function Loading() {
+export default function customSpinner() {
   return (
-    <Flex gap="middle" align="center"  justify="center" vertical className="h-96">
+    <Flex gap="middle" align="center"  justify="center" vertical className="min-h-screen">
         <Flex >
             <Spin  size="large">
               <div className="content" ></div>

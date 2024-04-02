@@ -3,14 +3,16 @@ import React, { useState,  useRef, useEffect } from "react";
 import {Map, YMaps} from "@pbe/react-yandex-maps";
 import DiscountsMapComp from '@/app/(home)/components/DiscountsMapComp';
 import {getMapItems} from "@/lib/actions";
+import { useQuery  } from "@tanstack/react-query";
+import {getMapList} from "@/lib/api/getDiscounts";
 
 
 export default function Home() {
 
   const mapRef = useRef<any>();
   
-  const [discounts, setDiscounts] = useState<any>(null);
-  const [coordinates, setCoordinates] = useState<any>([]);
+  // const [discounts, setDiscounts] = useState<any>(null);
+  // const [coordinates, setCoordinates] = useState<any>([]);
   const [map, setMap] = useState<any>(null);
   const [zoom, setZoom] = useState<any>(11);
 
@@ -20,29 +22,15 @@ export default function Home() {
       }
     };
 
-  useEffect(() => {
-    if(!map) return;
-    // if( zoom < 12) {
-    //     setTimeout(function() {setZoom(13) }, 1000); 
-    //     return;}
+    const { data, isLoading, isError } = useQuery({
+      queryFn: async () => await getMapList(map),
+      queryKey: ["discountMapList", map], //Array according to Documentation
+      // The query will not execute until the userId exists
+      enabled: !!map,
+    })
 
-    async function fetchMyAPI() {
-      const formData = new FormData();
-          formData.append("xLatitude", map[0][0]);
-          formData.append("xLongitude", map[0][1]);
-          formData.append("yLatitude", map[1][0]);
-          formData.append("yLongitude", map[1][1]);
-          let response = await getMapItems(formData);
-          setDiscounts(response)
-          
-          let mid2:any = []
-          response.map((item:any) => {mid2 = [...mid2, [item.latitude, item.longitude]]})
-          setCoordinates(mid2)
-    }
+    console.log(22, data)
 
-    fetchMyAPI()
-  
-  }, [map])
 
   return (<>
             <YMaps query={{ apikey: process.env.NEXT_PUBLIC_REACT_APP_YANDEX_KEY}}>
@@ -63,11 +51,11 @@ export default function Home() {
                             instanceRef={mapRef}
                             onLoad={refreshData}
                                 >
-                                { discounts &&
-                                    discounts.map((item: any, index:any) => {
+                                { data &&
+                                    data.map((item: any, index:any) => {
                                         return(
                                             <span key={index}>
-                                                <DiscountsMapComp  mainDataObject={{item, coordinates, index}} />
+                                                <DiscountsMapComp  mainDataObject={{item, coordinates: data.map((item:any) => [item.latitude, item.longitude]), index}} />
                                             </span>
                                         );
                                     })

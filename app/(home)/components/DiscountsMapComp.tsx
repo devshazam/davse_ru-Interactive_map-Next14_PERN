@@ -24,13 +24,13 @@ const DiscountsMapComp = ({ mainDataObject = {}}: any) => {
                             iconOffset: fspiralFromSameCoordinatesToYaMap(mainDataObject.coordinates, mainDataObject.index, mainDataObject.item), // !!!!!!!!!!!!!!
                         }}
                         properties={{
-                            iconContent: `${mainDataObject.item.discount}%`, // пару символов помещается
+                            iconContent: `${mainDataObject.item.sale}%`, // пару символов помещается
                             hintContent: '<em>кликни меня</em>',
                             balloonContent: `<div class="my-balloon">
-                                <h4>${mainDataObject.item.name}</h4>
+                                <h4>${mainDataObject.item.title}</h4>
                                 <p>
                                     Цена: ${mainDataObject.item.cost}; <br />
-                                    Cкидка ${mainDataObject.item.discount}%
+                                    Cкидка ${mainDataObject.item.sale}%
                                 </p>
                                 <a href="/discounts/${mainDataObject.item.id}">Посмотреть</a>
                                 </div>`,

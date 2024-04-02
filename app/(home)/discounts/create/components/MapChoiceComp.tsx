@@ -11,7 +11,7 @@ const MapChoiceComp = ({ changeCreateObject, createObject }: any) => {
 
     const mutation = useMutation({
         mutationFn: (newTodo: any) => {
-          return axios.post('/api/auth/discounts/coordinates', newTodo)
+          return axios.post('/api/discounts/coordinates', newTodo)
         },
       })
  

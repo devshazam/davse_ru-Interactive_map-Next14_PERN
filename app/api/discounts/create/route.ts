@@ -33,23 +33,20 @@ export async function POST(request: NextRequest) {
     const data = await s3.send(new PutObjectCommand({ Bucket, Key, Body }));
     // TODO сделать обраттотку ошибок data
     const location = `https://s3.timeweb.com/${Bucket}/${Key}`;
-
     
-
-    const deadLine = String(Date.now() + range * 24 * 60 * 60 * 1000);
-    console.log(deadLine)
-
+    var deadLine = new Date()
+    deadLine.setDate(deadLine.getDate() + range)
 
     const newDiscount = await prisma.discounts.create({
         data: {address, latitude, longitude, title, description, cost, sale, cat, image: location, deadLine,
           author: {
             connectOrCreate: {
               where: {
-                email: 'viola@prisma.io',
+                email: userEmail,
               },
               create: {
-                email: 'viola@prisma.io',
-                name: 'Цезарь!',
+                email: userEmail,
+                name: 'Qwerty',
                 password: '123', // TODO убрать пароль!?
               },
             },
@@ -60,7 +57,7 @@ export async function POST(request: NextRequest) {
           },
       })
 
-  return NextResponse.json({w: location});
+  return NextResponse.json(newDiscount);
 //   return NextResponse.json(response);
 }
 
