@@ -41,6 +41,7 @@ console.log(11, map)
 
 export async function getList({page, cat}: any) {
   page = page || 1;
+  cat = cat || false;
   const skip = page * 8 - 8;
 
   const numOfDiscounts = await prisma.discounts.count({

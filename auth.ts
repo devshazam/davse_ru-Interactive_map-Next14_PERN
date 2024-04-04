@@ -27,10 +27,10 @@ export const authConfig = {
     //   clientId: process.env.GITHUB_ID,
     //   clientSecret: process.env.GITHUB_SECRET
     // }),
-    VkProvider({
-      clientId: process.env.VK_CLIENT_ID,
-      clientSecret: process.env.VK_CLIENT_SECRET
-    })
+    // VkProvider({
+    //   clientId: process.env.VK_CLIENT_ID,
+    //   clientSecret: process.env.VK_CLIENT_SECRET
+    // })
 
   ],
   callbacks: {

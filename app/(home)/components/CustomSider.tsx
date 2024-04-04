@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React , {useState, useRef} from 'react';
 import { useSession } from "next-auth/react";
 import Link from 'next/link';
 import { FlagOutlined, CloudDownloadOutlined, UserSwitchOutlined , UnorderedListOutlined, AimOutlined} from '@ant-design/icons';
@@ -10,20 +10,27 @@ const { Sider } = Layout;
 
 
 export default function CustomSider() {
+  const [collaps, setCollaps] = useState(true)
   const { data: session, update } = useSession();
+  const ref = useRef(null);
+
+  console.log(ref)
+
+
   const items = [
                   {key: '1',  icon: React.createElement(FlagOutlined), label: (<Link href="/">Скидки на карте</Link>),},
                   {key: '2',  icon: React.createElement(UnorderedListOutlined), label: (<Link href="/discounts/list">Скидки списком</Link>),},
                   {key: '3',  icon: React.createElement(AimOutlined), label: (<Link href="/geolocation">Геолокация</Link>),},
                   {key: '4',  icon: React.createElement(UserSwitchOutlined), label: (session ? <Tooltip placement="right" title={"Кликните для ВЫХОДА!"}>
-                <p onClick={async () => {await logOut();}}>{session?.user?.email}</p></Tooltip> : <Link href="api/auth/signin">Войти</Link>),},
-                  {key: '5',  icon: React.createElement(CloudDownloadOutlined), label: (<Link href="/files/Клиенты.xlsx">Франшиза скачать</Link>), disabled: true},
+                <p onClick={async () => {await logOut();}}>{session?.user?.email}</p></Tooltip> : <Link href="/api/auth/signin">Войти</Link>),},
+                  {key: '5',  icon: React.createElement(CloudDownloadOutlined), label: (<a href="/files/Клиенты.xlsx" download>Франшиза скачать</a>), disabled: true},
   ];
 
 
   return (
       <Sider
         // defaultCollapsed
+        // ref={ref}
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
@@ -31,7 +38,9 @@ export default function CustomSider() {
         }}
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type);
+          setCollaps((collapsed ? true : false))
         }}
+        collapsed={collaps}
       >
         <Link href="/">
           <Image
@@ -42,7 +51,9 @@ export default function CustomSider() {
           />
         </Link>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items} />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items}
+         onSelect={() => {setCollaps(true)}}
+         />
       </Sider>
 
   );

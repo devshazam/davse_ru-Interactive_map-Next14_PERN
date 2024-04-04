@@ -36,6 +36,7 @@ export default function Home() {
             <YMaps query={{ apikey: process.env.NEXT_PUBLIC_REACT_APP_YANDEX_KEY}}>
                 <section className="map " >
                         <Map
+                          className="min-h-screen"
                             defaultState={{
                                 // center: [48.707067, 44.516975],
                                 center: [48.512273, 44.555203],

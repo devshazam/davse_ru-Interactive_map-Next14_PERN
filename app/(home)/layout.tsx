@@ -1,22 +1,15 @@
 "use client"
 import React, {useEffect, useState} from 'react';
 import Link from 'next/link';
-import { PlusOutlined, FlagOutlined, EditOutlined, LoginOutlined , UnorderedListOutlined, AimOutlined} from '@ant-design/icons';
+import { PlusOutlined} from '@ant-design/icons';
 import { FloatButton, Layout, Menu, theme, Image } from 'antd';
 import ReactQueryProvider from "@/components/providers/ReactQueryProvider";
 import CustomSpinner from "@/components/customSpinner";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer } = Layout;
 
 import CustomSider from './components/CustomSider';
 
-const items = [
-                {key: '2',  icon: React.createElement(FlagOutlined), label: (<Link href="/">Скидки на карте</Link>),},
-                {key: '3',  icon: React.createElement(UnorderedListOutlined), label: (<Link href="/discounts/list">Скидки списком</Link>),},
-                {key: '4',  icon: React.createElement(AimOutlined), label: (<Link href="/geolocation">Геолокация</Link>),},
-                {key: '5',  icon: React.createElement(LoginOutlined), label: (<Link href="/login">Войти</Link>),},
-                {key: '6',  icon: React.createElement(LoginOutlined), label: (<Link href="/admin">Админ</Link>),},
-];
 
 export default function HomeLayout({
   children,
@@ -41,27 +34,6 @@ export default function HomeLayout({
       <ReactQueryProvider>
      <Layout>
         <CustomSider />
-      {/* <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-      >
-        <Link href="/">
-          <Image
-          preview={false}
-            className='ml-8 mt-4  !w-3/5'
-            src="/files/logo2.png"
-            alt="логотип давсе"
-          />
-        </Link>
-        <div className="demo-logo-vertical" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
-      </Sider> */}
       
       <Layout>
         {/* <Header style={{ padding: 0, background: colorBgContainer }} >Давсе</Header> */}

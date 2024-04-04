@@ -13,8 +13,8 @@ export default function ListDiscounts() {
     const [cat, setCat] = useState('1');
 
     const { data, isLoading, isError } = useQuery({
-        queryFn: async () => await getList({page, cat}),
-        queryKey: ["discountList", page ,cat, ], //Array according to Documentation
+        queryFn: async () => await getList({page}),
+        queryKey: ["discountList", page ], //Array according to Documentation
 
       })
 
