@@ -1,5 +1,5 @@
 'use client'
-import React , {useState, useRef} from 'react';
+import React , {useEffect, useState} from 'react';
 import { useSession } from "next-auth/react";
 import Link from 'next/link';
 import { FlagOutlined, CloudDownloadOutlined, UserSwitchOutlined , UnorderedListOutlined, AimOutlined} from '@ant-design/icons';
@@ -11,10 +11,10 @@ const { Sider } = Layout;
 
 export default function CustomSider() {
   const [collaps, setCollaps] = useState(true)
+  const [flag, setFlag] = useState(true)
   const { data: session, update } = useSession();
-  const ref = useRef(null);
 
-  console.log(ref)
+
 
 
   const items = [
@@ -26,6 +26,9 @@ export default function CustomSider() {
                   {key: '5',  icon: React.createElement(CloudDownloadOutlined), label: (<a href="/files/Клиенты.xlsx" download>Франшиза скачать</a>), disabled: true},
   ];
 
+  useEffect(() => {
+      console.log(flag)
+  }, [flag, collaps])
 
   return (
       <Sider
@@ -34,11 +37,13 @@ export default function CustomSider() {
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
-          console.log(broken);
+          console.log(broken)
+          setFlag(broken)
         }}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-          setCollaps((collapsed ? true : false))
+          console.log(collapsed, flag, collaps)
+          
+          setCollaps((collapsed && flag ? true : false))
         }}
         collapsed={collaps}
       >
@@ -52,7 +57,7 @@ export default function CustomSider() {
         </Link>
         <div className="demo-logo-vertical" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items}
-         onSelect={() => {setCollaps(true)}}
+         onSelect={() => {setCollaps((flag ? true : false))}}
          />
       </Sider>
 
