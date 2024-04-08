@@ -16,6 +16,7 @@ import { useSession } from "next-auth/react";
 
 export default function CreateDiscount() {
   const { data: session, update } = useSession();
+  console.log(1,session?.user.email)
   const [createObject, setCreateObject] = useState<any>({sale: "5", range: 1, cat: "1", description: "", image: null, userEmail: session?.user.email});
   console.log(createObject)
 
