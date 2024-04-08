@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ImageResizingComp from "@/app/(home)/discounts/create/components/ImageResizingComp";
 import MapChoiceComp from "@/app/(home)/discounts/create/components/MapChoiceComp";
@@ -17,12 +17,17 @@ import { useSession } from "next-auth/react";
 export default function CreateDiscount() {
   const { data: session, update } = useSession();
   console.log(1,session?.user.email)
-  const [createObject, setCreateObject] = useState<any>({sale: "5", range: 1, cat: "1", description: "", image: null, userEmail: session?.user.email});
+  const [createObject, setCreateObject] = useState<any>({sale: "5", range: 1, cat: "1", description: "", image: null});
   console.log(createObject)
 
   function changeCreateObject(agent1: any) {
     setCreateObject({ ...createObject, ...agent1 });
   }
+
+
+  useEffect(() => {
+    changeCreateObject({userEmail: session?.user.email})
+  }, [JSON.stringify(session?.user.email)])
 
   const mutation = useMutation({
     mutationFn: (newTodo: any) => {
