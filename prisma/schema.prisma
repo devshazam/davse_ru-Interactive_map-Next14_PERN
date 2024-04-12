@@ -40,3 +40,8 @@ model Discounts {
   authorId      Int
 }
 
+model Errors {
+  id            Int         @id @default(autoincrement())
+  description   Json? 
+  createdAt     DateTime    @default(now())
+}

@@ -1,49 +1,40 @@
 "use client"
-import React from "react";
-import { Col, Image } from 'antd';
-import {getOneDiscount} from "@/lib/api/getDiscounts";
+import React, { useEffect } from "react";
+import { Col, Image, Divider } from 'antd';
+import {getOneDiscount} from "@/lib/api/actions";
 import { useSuspenseQuery  } from "@tanstack/react-query";
 import globalParamsObject from "@/lib/config/mainAppParameterObject";
+import CustomSpinner from "@/components/customSpinner";
+
 
 export default function ItemList({ id }: { id: string } ) {
           
+    
     const { data, isLoading, isError } = useSuspenseQuery ({
         queryFn: async () => await getOneDiscount(id),
         queryKey: ["discountOne", id], //Array according to Documentation
       });
+    useEffect(() => {
+
+    }, [])
     return (
         <> 
-        {data && 
+        {!!data &&
         <>
             <Col span={24} lg={12}>
-                <Image  alt="скидка Волгограда" src={data.image}/>
+                <Image className=" rounded" width="100%" alt="скидка Волгограда" src={data.image}/>
             </Col>
-            <Col span={12}>
-                <ul>
-                    <li>
-                        Название: {data.title}
-                    </li>
-                    <li>
-                        Скидка (%): {data.sale}
-                    </li> 
-                    <li>
-                        Категория скидки: {globalParamsObject.discounts.discountsCategory[+data.cat]}
-                    </li> 
-                    <li>
-                        Цена (руб.): { data.cost}
-                    </li>
-                    
-                    <li>
-                        Описание:{ data.description}
-                    </li>
-                    <li>
-                        Адрес:{ data.address}
-                    </li>
-                    <li>
-                        ID создателя скидки:{ data.authorId}
-                    </li>
-
-                </ul>
+            <Col  span={24} lg={12} className=" rounded border-zinc-200 border-2">
+                <h3 className="text-xl"><b>Цена (руб.):</b> { data.cost}</h3>
+                <h3 className="text-xl"><b>Скидка (%):</b> {data.sale}</h3>
+                <Divider />
+                <h3 className="text-xl"><b>Название:</b> {data.title}</h3>
+                <h3 className="text-xl"><b>Описание:</b> { data.description}</h3>
+                <Divider />
+                <h3 className="text-xl"><b>Категория скидки:</b> {globalParamsObject.discounts.discountsCategory[+data.cat]}</h3>
+                <h3 className="text-xl"><b>Адрес:</b> { data.address}</h3>
+                <h3 className="text-xl"><b>ID создателя скидки:</b> { data.authorId}</h3>
+         
             </Col>
             </>
             }

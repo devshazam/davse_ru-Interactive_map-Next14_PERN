@@ -5,7 +5,7 @@ import { Card, Col, Row, Badge, Pagination  } from 'antd';
 const { Meta } = Card;
 import Link from 'next/link';
 import { useQuery  } from "@tanstack/react-query";
-import {getList } from "@/lib/api/getDiscounts";
+import {getList } from "@/lib/api/actions";
 import CustomSpinner from "@/components/customSpinner";
 
 export default function ListDiscounts() {

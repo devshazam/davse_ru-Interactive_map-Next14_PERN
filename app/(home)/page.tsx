@@ -2,9 +2,8 @@
 import React, { useState,  useRef, useEffect } from "react";
 import {Map, YMaps} from "@pbe/react-yandex-maps";
 import DiscountsMapComp from '@/app/(home)/components/DiscountsMapComp';
-import {getMapItems} from "@/lib/actions";
 import { useQuery  } from "@tanstack/react-query";
-import {getMapList} from "@/lib/api/getDiscounts";
+import {getMapList} from "@/lib/api/actions";
 
 
 export default function Home() {

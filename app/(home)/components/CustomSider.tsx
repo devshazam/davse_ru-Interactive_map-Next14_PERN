@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Link from 'next/link';
 import { FlagOutlined, CloudDownloadOutlined, UserSwitchOutlined , UnorderedListOutlined, AimOutlined} from '@ant-design/icons';
 import { Layout, Menu, theme, Image, Tooltip } from 'antd';
-import {logOut} from '@/lib/actions'
+import {logOut} from '@/lib/api/actions'
 const { Sider } = Layout;
 
 

@@ -13,14 +13,15 @@ export default function GlobalError({
   return (
     <html>
       <body>
+        <div className='flex min-h-screen justify-center items-center'>
       <Result
             status="403"
             title="403"
             subTitle="ГЛОБАЛЬНАЯ ОШИБКА"
             extra={<Button type="primary" onClick={() => reset()}>На ГЛАВНУЮ!</Button>}
         />
+        </div>
 
-        {/* <button onClick={() => reset()}>Try again</button> */}
       </body>
     </html>
   )

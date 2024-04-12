@@ -14,9 +14,9 @@ console.log('params', params)
                 < Suspense fallback={<Skeleton  />}>
                     <ItemList id={id}/>
                 </Suspense>
-                <Col span={24} lg={12}>
+                {/* <Col span={24} lg={12}>
                     <Image alt="скидка Волгограда" src="/files/qwe.jpg"/>
-                </Col>
+                </Col> */}
             </Row>
             :
             <Result

@@ -18,11 +18,12 @@ export default function Error({
 
   // TODO  кого использовать глобал или не глобал ошибки
   return (
-      <Result
+    <div className='flex min-h-screen justify-center items-center'>
+      <Result 
         status="403"
         title="403"
         subTitle="КОРНЕВАЯ ОШИБКА"
         extra={<Button type="primary" onClick={() => reset()}>На ГЛАВНУЮ!</Button>}
-      />
+      /></div>
   )
 }

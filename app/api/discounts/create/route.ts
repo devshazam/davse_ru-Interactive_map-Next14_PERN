@@ -24,7 +24,7 @@ const s3 = new S3Client({
 
 // endpoint to upload a file to the bucket
 export async function POST(request: NextRequest) {
-
+  try{
     const {userEmail, range,  address, latitude, longitude, title, description, cost, sale, cat, image} = await request.json()
     
     const Key = `new-davse/${uuidv4()}.jpg`
@@ -57,8 +57,18 @@ export async function POST(request: NextRequest) {
           },
       })
 
-  return NextResponse.json(newDiscount);
-//   return NextResponse.json(response);
+    return NextResponse.json(newDiscount);
+
+  } catch (e:any) {
+    try{
+        await prisma.errors.create({data: {description: JSON.stringify(['Error-02', e?.status, e?.message])}})
+    }catch (error) {
+        console.log(error);
+    }
+    return NextResponse.json(
+    { message: "Error-01", status: 500 }
+  );
+}
 }
 
 
