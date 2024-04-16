@@ -32,7 +32,7 @@ const Discounts = ({ changeCreateObject, createObject }: any) => {
                     {/* Цена */}
                         <Input addonAfter="руб." placeholder="цена со скидкой без копеек!" showCount maxLength={8} status="" addonBefore="Цена:"  onChange={(e: any) =>
                                 changeCreateObject({
-                                    cost: e.target.value,
+                                    cost: +e.target.value,
                                 })
                             } />
 
@@ -43,16 +43,16 @@ const Discounts = ({ changeCreateObject, createObject }: any) => {
                                 sale: value,
                             })
                         }>
-                            <Select.Option value="5">Скидка 5%</Select.Option>
-                            <Select.Option value="10">Скидка 10%</Select.Option>
-                            <Select.Option value="15">Скидка 15%</Select.Option>
-                            <Select.Option value="20">Скидка 20%</Select.Option>
-                            <Select.Option value="25">Скидка 25%</Select.Option>
-                            <Select.Option value="30">Скидка 30%</Select.Option>
-                            <Select.Option value="35">Скидка 35%</Select.Option>
-                            <Select.Option value="40">Скидка 40%</Select.Option>
-                            <Select.Option value="45">Скидка 45%</Select.Option>
-                            <Select.Option value="50">Скидка 50%</Select.Option>
+                            <Select.Option value={5}>Скидка 5%</Select.Option>
+                            <Select.Option value={10}>Скидка 10%</Select.Option>
+                            <Select.Option value={15}>Скидка 15%</Select.Option>
+                            <Select.Option value={20}>Скидка 20%</Select.Option>
+                            <Select.Option value={25}>Скидка 25%</Select.Option>
+                            <Select.Option value={30}>Скидка 30%</Select.Option>
+                            <Select.Option value={35}>Скидка 35%</Select.Option>
+                            <Select.Option value={40}>Скидка 40%</Select.Option>
+                            <Select.Option value={45}>Скидка 45%</Select.Option>
+                            <Select.Option value={50}>Скидка 50%</Select.Option>
                         </Select>
                         
                     {/* Категория */}
@@ -65,7 +65,7 @@ const Discounts = ({ changeCreateObject, createObject }: any) => {
                             {globalParamsObject.discounts.discountsCategory.map(
                                 (item: string, index: number) => {
                                     return (
-                                        <Select.Option key={index + 1} value={String(index + 1)}>{item}</Select.Option>
+                                        <Select.Option key={index + 1} value={index + 1}>{item}</Select.Option>
                                     );
                                 }
                             )}

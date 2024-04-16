@@ -17,17 +17,20 @@ export async function getOneDiscount(id: any) {
 
 
 
-export async function getMapList(map: any) {
+export async function getMapList(map: any, createObject: any) {
+
+  const {cat } = createObject;
   try{
     const discounts = await prisma.discounts.findMany({
       where: {
+        ...(+cat ? { cat } : {}),
         latitude: {
-          gt: String(map[0][0]),
-          lt: String(map[1][0]),
+          gt: map[0][0],
+          lt: map[1][0],
         },
         longitude: {
-          gt: String(map[0][1]),
-          lt: String(map[1][1]),
+          gt: map[0][1],
+          lt: map[1][1],
         }, 
       },
       select: {
@@ -52,15 +55,18 @@ export async function getMapList(map: any) {
   }
 }
 
-export async function getList({page, cat}: any) {
+export async function getList(page:any, createObject:any) {
+
   try{ 
+    let {cat, sort, param } = createObject;
+    console.log({ [param]: sort, })
     page = page || 1;
     cat = cat || false;
     const skip = page * 8 - 8;
 
     const numOfDiscounts = await prisma.discounts.count({
       where: {
-        ...(cat ? { cat } : {}),
+        ...(+cat ? { cat } : {}),
       },
 
     })
@@ -69,23 +75,14 @@ export async function getList({page, cat}: any) {
       skip,
       take: 8,
       where: {
-        ...(cat ? { cat } : {}),
+        ...(+cat ? { cat } : {}),
       },
       orderBy: [
-        {
-          sale: 'desc',
-        },
+        { sale: "asc", },
       ],
-      select: {
-        id: true,
-        image: true,
-        description: true,
-        title: true,
-        cost: true,
-        sale: true,
-      },
+      select: { id: true, image: true, description: true, title: true, cost: true, sale: true, },
     })
-    
+    console.log(results)
     return {numOfDiscounts, results};
 
   } catch (e:any) {

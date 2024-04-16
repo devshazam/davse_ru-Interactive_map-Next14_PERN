@@ -7,19 +7,25 @@ import Link from 'next/link';
 import { useQuery  } from "@tanstack/react-query";
 import {getList } from "@/lib/api/actions";
 import CustomSpinner from "@/components/customSpinner";
+import IputsParams from "../../components/IputsParams";
 
 export default function ListDiscounts() {
+    const [createObject, setCreateObject] = useState<any>({cat: 0, sort: "asc", param: "cost"}); // desc
     const [page, setPage] = useState(1);
-    const [cat, setCat] = useState('1');
 
     const { data, isLoading, isError } = useQuery({
-        queryFn: async () => await getList({page}),
-        queryKey: ["discountList", page ], //Array according to Documentation
+        queryFn: async () => await getList(page, createObject),
+        queryKey: ["discountList", page , createObject], //Array according to Documentation
 
       })
-
+console.log(data)
+      function changeCreateObject(agent1: any) {
+        setCreateObject({ ...createObject, ...agent1 });
+      }
     return (
-        <>{!!data ? 
+        <>
+            <IputsParams createObject={createObject} changeCreateObject={changeCreateObject}/>
+        {!!data ? 
             <>
              <Row gutter={[12, 12]}>
                 {data?.results.map((item, index) => {

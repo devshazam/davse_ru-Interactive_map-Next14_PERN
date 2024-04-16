@@ -12,8 +12,10 @@ export async function POST(req:any,res:any){
             "X-Secret": process.env.SECRET_KEY_FIND_ADDRESS_BY_ID
             };
         const fyaQ1 = await axios.post(`https://cleaner.dadata.ru/api/v1/clean/address`, JSON.stringify([address]), {headers});
-        // console.log(fyaQ1)
-        const fyaQ2 = {result: fyaQ1.data[0].result, latitude: fyaQ1.data[0].geo_lat, longitude: fyaQ1.data[0].geo_lon};
+        console.log(fyaQ1.data[0].geo_lat, parseFloat(fyaQ1.data[0].geo_lat))
+
+        
+        const fyaQ2 = {result: fyaQ1.data[0].result, latitude: parseFloat(fyaQ1.data[0].geo_lat), longitude: parseFloat(fyaQ1.data[0].geo_lon)};
 
         return NextResponse.json(fyaQ2)
     } catch (e:any) {

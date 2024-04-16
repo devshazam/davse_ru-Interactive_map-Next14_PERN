@@ -5,7 +5,7 @@ import CustomSpinner from "@/components/customSpinner";
 
 export default function Home() {
   const [coordinates, setCoordinates] = useState<any>(null);
-  
+  console.log(coordinates)
   useEffect(() => {
       const successCallback = (position:any) => {
         setCoordinates([position.coords.latitude, position.coords.longitude])
@@ -24,6 +24,7 @@ export default function Home() {
                       <section className="map">
                         {!!coordinates && 
                               <Map
+                              className="min-h-screen"
                                   state={{
                                       center: coordinates, // координаты центра карты 48.512741, 44.535905
                                       zoom: 13,

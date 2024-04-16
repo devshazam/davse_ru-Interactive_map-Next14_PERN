@@ -31,7 +31,7 @@ export default function ItemList({ id }: { id: string } ) {
                 <h3 className="text-xl"><b>Название:</b> {data.title}</h3>
                 <h3 className="text-xl"><b>Описание:</b> { data.description}</h3>
                 <Divider />
-                <h3 className="text-xl"><b>Категория скидки:</b> {globalParamsObject.discounts.discountsCategory[+data.cat]}</h3>
+                <h3 className="text-xl"><b>Категория скидки:</b> {globalParamsObject.discounts.discountsCategory[+data.cat - 1]}</h3>
                 <h3 className="text-xl"><b>Адрес:</b> { data.address}</h3>
                 <h3 className="text-xl"><b>ID создателя скидки:</b> { data.authorId}</h3>
          

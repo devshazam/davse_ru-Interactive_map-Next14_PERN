@@ -27,12 +27,12 @@ model Discounts {
   id            Int       @id @default(autoincrement())
   title         String
   description   String?
-  cost          String
-  sale          String
-  cat           String
+  cost          Float
+  sale          Int
+  cat           Int
   address       String
-  latitude      String
-  longitude     String
+  latitude      Float
+  longitude     Float
   image         String
   deadLine      DateTime
   createdAt     DateTime  @default(now())

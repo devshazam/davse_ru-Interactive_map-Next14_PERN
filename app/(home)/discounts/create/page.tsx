@@ -9,25 +9,23 @@ import { z } from 'zod';
 import {
   useMutation,
 } from '@tanstack/react-query'
-
 import { Button, Col, Row  , Flex, Result  } from 'antd';
 import { useSession } from "next-auth/react";
 
 
+
+
 export default function CreateDiscount() {
-  const { data: session, update } = useSession();
-  console.log(1,session?.user.email)
-  const [createObject, setCreateObject] = useState<any>({sale: "5", range: 1, cat: "1", description: "", image: null});
-  console.log(createObject)
+  const { data: session } = useSession();
+  const [createObject, setCreateObject] = useState<any>({sale: 5, range: 1, cat: 1, description: "", image: null, userEmail: 0, latitude: 0, longitude: 0});
+  console.log(21, createObject)
 
   function changeCreateObject(agent1: any) {
     setCreateObject({ ...createObject, ...agent1 });
   }
-
-
-  useEffect(() => {
+  if(Boolean(session?.user.email) && !createObject.userEmail){
     changeCreateObject({userEmail: session?.user.email})
-  }, [JSON.stringify(session?.user.email)])
+  }
 
   const mutation = useMutation({
     mutationFn: (newTodo: any) => {
@@ -45,8 +43,12 @@ export default function CreateDiscount() {
         alert("Картинка не загружена!");
         return;}
       if(!Boolean(createObject.title) || !Boolean(createObject.cost)){
-        alert("Вы не ввели название и цену!");
+        alert("Вы не ввели название и цену цифрами!");
         return;}
+        if(!Number.isInteger(createObject.cost)){
+          alert("Введите цену без копеек!");
+          return;
+        }
         if(!Boolean(createObject.address)){
           alert("Вы не ввели адрес!");
           return;}
