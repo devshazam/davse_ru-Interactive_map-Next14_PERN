@@ -98,6 +98,10 @@ export default function ResponsiveAppBar() {
                   <Link href={`${page}`}><Typography textAlign="center">{pagesToRussian[page]}</Typography></Link>
                 </MenuItem>
               ))}
+              <MenuItem key={`out`} onClick={handleCloseNavMenu}>
+                  <Link href={`https://docs.google.com/presentation/d/1QnCfEEjatQz9KI4QQ73HVNNRYpLCPvoA/edit?usp=sharing&ouid=117443855612121402557&rtpof=true&sd=true`} target='blank'><Typography textAlign="center">Commercial offer</Typography></Link>
+                </MenuItem>
+
             </Menu>
           </Box>
           {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />*/}
@@ -131,7 +135,7 @@ export default function ResponsiveAppBar() {
                 {pagesToRussian[page]}
               </Button></Link>
             ))}
-            <Link href={`https://www.ozon.ru/my/orderlis`} key={`out`} target='blank'><Button
+            <Link href={`https://docs.google.com/presentation/d/1QnCfEEjatQz9KI4QQ73HVNNRYpLCPvoA/edit?usp=sharing&ouid=117443855612121402557&rtpof=true&sd=true`} key={`out`} target='blank'><Button
                 key={`out`}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
