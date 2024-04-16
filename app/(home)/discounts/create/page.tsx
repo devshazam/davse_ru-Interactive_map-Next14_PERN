@@ -85,6 +85,7 @@ export default function CreateDiscount() {
                 <Button type="primary" loading={false} className="mb-5"
                 // disabled
                 onClick={sendToServer}
+                disabled={mutation.isPending}
                 >
                   Опубликовать!
                 </Button>
