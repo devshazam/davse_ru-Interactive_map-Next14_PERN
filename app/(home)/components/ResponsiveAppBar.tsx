@@ -20,8 +20,8 @@ import { Modal } from 'antd';
 import {logOut} from '@/lib/api/actions'
 import OutputIcon from '@mui/icons-material/Output';
 
-const pages = ['/discounts/list', '/geolocation'];
-const pagesToRussian:any = {"/discounts/list": "Скидки списком", "/geolocation": "Геолокация"};
+const pages = ['/', '/discounts/list', '/geolocation'];
+const pagesToRussian:any = {"/": "Скидки на карте", "/discounts/list": "Скидки списком", "/geolocation": "Геолокация"};
 
 
 export default function ResponsiveAppBar() {
