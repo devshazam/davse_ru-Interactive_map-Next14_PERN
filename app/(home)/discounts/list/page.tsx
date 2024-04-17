@@ -10,7 +10,7 @@ import CustomSpinner from "@/components/customSpinner";
 import IputsParams from "../../components/IputsParams";
 
 export default function ListDiscounts() {
-    const [createObject, setCreateObject] = useState<any>({cat: 0, sort: "asc", param: "cost"}); // desc
+    const [createObject, setCreateObject] = useState<any>({cat: 0, sort: "asc", param: "sale"}); // desc
     const [page, setPage] = useState(1);
 
     const { data, isLoading, isError } = useQuery({
