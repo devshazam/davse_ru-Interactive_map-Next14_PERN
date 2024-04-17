@@ -3,7 +3,7 @@ import React, { useState,  useRef, useEffect } from "react";
 import {Map, YMaps ,Placemark} from "@pbe/react-yandex-maps";
 import CustomSpinner from "@/components/customSpinner";
 
-export default function Home() {
+export default function Geolocation() {
   const [coordinates, setCoordinates] = useState<any>(null);
   console.log(coordinates)
   useEffect(() => {

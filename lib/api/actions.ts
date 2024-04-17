@@ -59,7 +59,7 @@ export async function getList(page:any, createObject:any) {
 
   try{ 
     let {cat, sort, param } = createObject;
-    console.log({ [param]: sort, })
+    // console.log({ [param]: sort, })
     page = page || 1;
     cat = cat || false;
     const skip = page * 8 - 8;
@@ -78,11 +78,11 @@ export async function getList(page:any, createObject:any) {
         ...(+cat ? { cat } : {}),
       },
       orderBy: [
-        { sale: "asc", },
+        { [param]: sort, },
       ],
       select: { id: true, image: true, description: true, title: true, cost: true, sale: true, },
     })
-    console.log(results)
+    // console.log(results)
     return {numOfDiscounts, results};
 
   } catch (e:any) {

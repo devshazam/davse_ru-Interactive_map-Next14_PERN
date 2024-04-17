@@ -28,10 +28,7 @@ const IputsParams = ({ changeCreateObject, createObject }: any) => {
                                 {globalParamsObject.discounts.discountsCategory.map(
                                     (item: string, index: number) => {
                                         return (
-                                            <>
-                                            
                                             <Select.Option key={index + 1} value={index + 1}>{item}</Select.Option>
-                                            </>
                                         );
                                     }
                                 )}
