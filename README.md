@@ -1,9 +1,6 @@
-~ npm install next-auth@beta
-
-## TIP:
-    - для смены хоста авторизации
-        - яндекс аккаунт - 1 шт
-        - гитхаб аккаунт - 1 шт
-        - env 
-          - Vercel
-          - prod
+Ref: https://davse.ru/
+## Functionality:
+    - Intrractive map with users marcks on it. 
+    - Every user can create marck with custom events
+    - Every user can view map and marcks with all information!
+    
