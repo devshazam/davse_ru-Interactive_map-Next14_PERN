@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next'
 import SessionWrapper from '@/components/providers/SessionWrapper'
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-
+import YandexMetric from '@/components/YandexMetric';
 import '@/app/globals.css';
 
 export const metadata: Metadata = {
@@ -27,6 +27,7 @@ export default function RootLayout({
           <AntdRegistry> 
             {children}
           </AntdRegistry> 
+          <YandexMetric />
         </body>
       </html>
     </SessionWrapper>
